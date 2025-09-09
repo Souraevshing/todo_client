@@ -1,6 +1,6 @@
 import { Pencil, Trash2, CheckCircle, Circle } from "lucide-react";
 
-import { TodoForm } from "@/components/todos/create-todo";
+import { TodoForm } from "@/components/todos/create-todo-form";
 import { Button } from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import { Card } from "@/components/ui/card";

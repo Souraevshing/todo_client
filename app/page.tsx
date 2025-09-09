@@ -1,33 +1,44 @@
+import { ClipboardList } from "lucide-react";
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { getTodos } from "@/app/todos/fetch";
-import { TodoForm } from "@/components/todos/create-todo";
-import { createTodoAction } from "@/app/todos/actions";
+import { TodoForm } from "@/components/todos/create-todo-form";
 import { TodoList } from "@/components/todos/todo-list";
+
+import { getTodos } from "@/app/todos/fetch";
+import { createTodoAction } from "@/app/todos/actions";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  const todos = await getTodos();
+    const todos = await getTodos();
 
-  return (
-      <div className="space-y-6">
-        <Card>
-          <CardHeader>
-            <h1 className="text-2xl font-semibold tracking-tight">Todos</h1>
-          </CardHeader>
-          <CardContent>
-            <TodoForm action={createTodoAction} />
-          </CardContent>
-        </Card>
+    return (
+        <div className="container mx-auto max-w-2xl space-y-8 px-4 py-6">
+            {/* Add Todo */}
+            <Card className="shadow-sm transition-colors">
+                <CardHeader>
+                    <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">
+                        Todos
+                    </h1>
+                </CardHeader>
+                <CardContent>
+                    <TodoForm action={createTodoAction} />
+                </CardContent>
+            </Card>
 
-
-        <section className="space-y-2">
-          {todos.length === 0 ? (
-              <p className="text-sm text-muted-foreground">No todos yet. Add your first one above.</p>
-          ) : (
-              todos.map((t) => <TodoList key={t._id} todo={t} />)
-          )}
-        </section>
-      </div>
-  );
+            {/* Todo List */}
+            <section className="space-y-3">
+                {todos.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-10 text-center text-muted-foreground">
+                        <ClipboardList className="h-8 w-8 mb-2 opacity-70 dark:text-gray-500 text-neutral-900" />
+                        <p className="text-sm sm:text-base font-medium">
+                            No todos yet.
+                        </p>
+                    </div>
+                ) : (
+                    todos.map((t) => <TodoList key={t._id} todo={t} />)
+                )}
+            </section>
+        </div>
+    );
 }
