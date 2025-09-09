@@ -10,7 +10,7 @@ export async function createTodoAction(formData: FormData) {
     const description = (formData.get("description") as string || "").trim();
     if (!title) throw new Error("Title is required");
 
-    await fetchJSON(`${BASE_URL}/todos`, {
+    await fetchJSON(`${BASE_URL}/api/v1/todos`, {
         method: "POST",
         body: JSON.stringify({ title, description: description || undefined }),
     });
@@ -19,14 +19,14 @@ export async function createTodoAction(formData: FormData) {
 
 export async function deleteTodoAction(formData: FormData) {
     const id = String(formData.get("id"));
-    await fetchJSON(`${BASE_URL}/todos/${id}`, { method: "DELETE" });
+    await fetchJSON(`${BASE_URL}/api/v1/todos/${id}`, { method: "DELETE" });
     revalidatePath("/");
 }
 
 export async function toggleCompleteAction(formData: FormData) {
     const id = String(formData.get("id"));
     const completed = String(formData.get("completed")) === "true";
-    await fetchJSON(`${BASE_URL}/todos/${id}`, {
+    await fetchJSON(`${BASE_URL}/api/v1/todos/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ completed }),
     });
@@ -39,7 +39,7 @@ export async function updateTodoAction(formData: FormData) {
     const description = (formData.get("description") as string || "").trim();
     if (!title) throw new Error("Title is required");
 
-    await fetchJSON(`${BASE_URL}/todos/${id}`, {
+    await fetchJSON(`${BASE_URL}/api/v1/todos/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ title, description: description || undefined }),
     });

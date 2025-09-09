@@ -6,5 +6,5 @@ export type Todo = { _id: string; title: string; description?: string; completed
 export type CreateTodoInput = { title: string; description?: string };
 export type UpdateTodoInput = Partial<Omit<Todo, "_id">>;
 export async function getTodos(): Promise<Todo[]> {
-    return fetchJSON<Todo[]>(`${BASE_URL}/todos`);
+    return fetchJSON<Todo[]>(`${BASE_URL}/api/v1/todos`);
 }
