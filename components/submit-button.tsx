@@ -1,11 +1,14 @@
 "use client";
 
-import { useTransition } from "react";
+import React, { useTransition } from "react";
 import { toast } from "sonner";
-import { Button, type ButtonProps } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
-type SubmitButtonProps = ButtonProps & {
+import { Button } from "@/components/ui/button";
+
+type ButtonProps = React.ComponentPropsWithoutRef<typeof Button> & {};
+
+interface SubmitButtonProps extends ButtonProps {
     label: string;
     success?: string;
     error?: string;

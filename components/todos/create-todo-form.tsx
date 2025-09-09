@@ -11,7 +11,6 @@ export function TodoForm({
     action?: (fd: FormData) => Promise<void>;
     defaults?: { title?: string; description?: string; id?: string };
 }) {
-
     return (
         <form
             action={createTodoAction}
