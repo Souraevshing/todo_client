@@ -5,6 +5,7 @@ import {Toaster} from "sonner";
 
 import {ThemeProvider} from "@/lib/theme-provider";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -35,6 +36,7 @@ export default function RootLayout({
       <ThemeProvider>
           <Navbar />
           <main className="container mx-auto max-w-2xl px-4 py-6">{children}</main>
+          <Footer/>
           <Toaster richColors position="top-center" />
       </ThemeProvider>
       </body>
