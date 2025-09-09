@@ -1,3 +1,5 @@
+import {toast} from 'sonner';
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,9 +12,31 @@ export function TodoForm({
     action?: (fd: FormData) => Promise<void>;
     defaults?: { title?: string; description?: string; id?: string };
 }) {
+
+    const handleSubmit = async (formData: FormData) => {
+        const title = formData.get("title")?.toString().trim();
+        const description = formData.get("description")?.toString().trim();
+
+        if (!title) {
+            toast.error("Title is required!");
+            return;
+        }
+        if (!description) {
+            toast.error("Description is required!");
+            return;
+        }
+
+        try {
+            await action?.(formData);
+            toast.success("Todo saved!");
+        } catch {
+            toast.error("Failed to save todo.");
+        }
+    };
+
     return (
         <form
-            action={action}
+            action={handleSubmit}
             className="grid gap-4 sm:gap-5 p-1"
         >
             {defaults?.id && (
