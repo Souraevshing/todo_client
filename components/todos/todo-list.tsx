@@ -11,6 +11,7 @@ import { TodoForm } from "@/components/todos/create-todo";
 
 export function TodoItem({ todo }: { todo: Todo }) {
     const toggleFormId = `toggle-${todo._id}`;
+
     return (
         <Card className="flex items-center justify-between p-3">
             <div className="flex items-center gap-3">

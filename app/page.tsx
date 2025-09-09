@@ -6,7 +6,6 @@ import { TodoItem } from "@/components/todos/todo-list";
 
 export const dynamic = "force-dynamic";
 
-
 export default async function Page() {
   const todos = await getTodos();
 
