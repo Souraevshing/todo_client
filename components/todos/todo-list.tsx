@@ -1,35 +1,78 @@
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, CheckCircle, Circle } from "lucide-react";
 
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import ToggleCompleteClient from "@/components/todos/toggle-todo";
-import { Todo } from "@/app/todos/fetch";
-import { deleteTodoAction, toggleCompleteAction, updateTodoAction } from "@/app/todos/actions";
 import { TodoForm } from "@/components/todos/create-todo";
+import { Button } from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
-export function TodoItem({ todo }: { todo: Todo }) {
-    const toggleFormId = `toggle-${todo._id}`;
+import { Todo } from "@/app/todos/fetch";
+import {
+    deleteTodoAction,
+    toggleCompleteAction,
+    updateTodoAction,
+} from "@/app/todos/actions";
 
+import { cn } from "@/lib/utils";
+
+export function TodoList({ todo }: { todo: Todo }) {
     return (
-        <Card className="flex items-center justify-between p-3">
-            <div className="flex items-center gap-3">
-                <form id={toggleFormId} action={toggleCompleteAction} className="contents">
-                    <input type="hidden" name="id" value={todo._id} />
-                    <input type="hidden" name="completed" value={(!todo.completed).toString()} />
-                    <Checkbox defaultChecked={todo.completed} />
+        <Card className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 transition-colors">
+            <div className="flex items-start sm:items-center gap-3 flex-1">
+                <form action={toggleCompleteAction} className="flex items-start">
+                    <Input type="hidden" name="id" value={todo._id} />
+                    <Input
+                        type="hidden"
+                        name="completed"
+                        value={(!todo.completed).toString()}
+                    />
+                    <Button
+                        type="submit"
+                        aria-label={
+                            todo.completed ? "Mark as incomplete" : "Mark as complete"
+                        }
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                        {todo.completed ? (
+                            <CheckCircle className="h-5 w-5 text-primary" />
+                        ) : (
+                            <Circle className="h-5 w-5" />
+                        )}
+                    </Button>
                 </form>
-                <ToggleCompleteClient formId={toggleFormId} />
-                <div className="leading-tight">
-                    <p className="font-medium line-clamp-1 {todo.completed ? 'line-through text-muted-foreground' : ''}">{todo.title}</p>
-                    {todo.description && <p className="text-sm text-muted-foreground line-clamp-2">{todo.description}</p>}
+
+                <div className="flex flex-col min-w-0">
+                    <p
+                        className={cn(
+                            "font-medium line-clamp-1 transition-all",
+                            todo.completed && "line-through text-muted-foreground"
+                        )}
+                    >
+                        {todo.title}
+                    </p>
+                    {todo.description && (
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                            {todo.description}
+                        </p>
+                    )}
                 </div>
             </div>
-            <div className="flex items-center gap-2">
+
+            <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button variant="outline" size="icon" aria-label="Edit">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            aria-label="Edit todo"
+                            className="hover:bg-accent"
+                        >
                             <Pencil className="h-4 w-4" />
                         </Button>
                     </DialogTrigger>
@@ -37,12 +80,26 @@ export function TodoItem({ todo }: { todo: Todo }) {
                         <DialogHeader>
                             <DialogTitle>Edit Todo</DialogTitle>
                         </DialogHeader>
-                        <TodoForm action={updateTodoAction} defaults={{ id: todo._id, title: todo.title, description: todo.description }} />
+                        <TodoForm
+                            action={updateTodoAction}
+                            defaults={{
+                                id: todo._id,
+                                title: todo.title,
+                                description: todo.description,
+                            }}
+                        />
                     </DialogContent>
                 </Dialog>
+
                 <form action={deleteTodoAction}>
-                    <input type="hidden" name="id" value={todo._id} />
-                    <Button type="submit" variant="destructive" size="icon" aria-label="Delete">
+                    <Input type="hidden" name="id" value={todo._id} />
+                    <Button
+                        type="submit"
+                        variant="destructive"
+                        size="icon"
+                        aria-label="Delete todo"
+                        className="hover:bg-destructive/90"
+                    >
                         <Trash2 className="h-4 w-4" />
                     </Button>
                 </form>
