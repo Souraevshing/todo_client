@@ -22,7 +22,7 @@ export function TodoForm({
             {/* Title */}
             <div className="grid gap-2">
                 <Label htmlFor="title" className="text-sm font-medium">
-                    Title
+                    Title<span className={`align-super text-red-500`}>*</span>
                 </Label>
                 <Input
                     id="title"
@@ -39,9 +39,10 @@ export function TodoForm({
             {/* Description */}
             <div className="grid gap-2">
                 <Label htmlFor="description" className="text-sm font-medium">
-                    Description
+                    Description<span className={`align-super text-red-500`}>*</span>
                 </Label>
                 <Textarea
+                    required
                     id="description"
                     name="description"
                     inputMode="text"
@@ -54,8 +55,10 @@ export function TodoForm({
             {/* Actions */}
             <div className="flex justify-end gap-2 pt-2">
                 <Button
+                    variant={'ghost'}
+                    size={'icon'}
                     type="submit"
-                    className="px-4 block w-full"
+                    className="px-4 w-full cursor-pointer"
                 >
                     Save
                 </Button>
