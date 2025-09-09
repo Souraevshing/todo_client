@@ -38,7 +38,7 @@ export default function RootLayout({
           <Navbar />
           <main className="container mx-auto max-w-2xl px-4 py-6">{children}</main>
           <Footer/>
-          <Toaster richColors position="top-center" visibleToasts={2} expand duration={1500} toastOptions={{duration:1500}} icons={{success: <CheckCircle2Icon className={`w-4 h-4 text-green-500`}/>, info: <InfoIcon className={`w-4 h-4 text-yellow-500`} />, close: <XIcon className={`w-4 h-4 text-red-500`}/>, loading: <Loader2Icon className={`w-4 h-4`}/>, error: <BanIcon className={`w-4 h-4 text-red-500`}/>, warning: <ShieldAlertIcon className={`w-4 h-4 text-red-500`}/>}} />
+          <Toaster richColors position="top-center" visibleToasts={2} expand duration={1500} toastOptions={{duration:1500}} icons={{success: <CheckCircle2Icon className={`w-4 h-4 text-green-500`}/>, info: <InfoIcon className={`w-4 h-4 text-yellow-500`} />, close: <XIcon className={`w-4 h-4 text-red-500`}/>, loading: <Loader2Icon className={`w-4 h-4 animate-spin transition-all`}/>, error: <BanIcon className={`w-4 h-4 text-red-500`}/>, warning: <ShieldAlertIcon className={`w-4 h-4 text-red-500`}/>}} />
       </ThemeProvider>
       </body>
     </html>

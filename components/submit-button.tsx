@@ -1,25 +1,19 @@
 "use client";
 
-
-import React, { useTransition } from "react";
+import { useTransition } from "react";
 import { toast } from "sonner";
+import { Button, type ButtonProps } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-
-type ButtonProps = React.ComponentPropsWithoutRef<typeof Button>;
-
-interface SubmitButtonProps extends ButtonProps {
+type SubmitButtonProps = ButtonProps & {
     label: string;
-    action: (fd: FormData) => Promise<any>;
     success?: string;
     error?: string;
     children?: React.ReactNode;
-}
+};
 
 export function SubmitButton({
                                  label,
-                                 action,
                                  success = "Success!",
                                  error = "Something went wrong.",
                                  children,
@@ -30,22 +24,11 @@ export function SubmitButton({
     return (
         <Button
             {...props}
-            type={props.type ?? "submit"}
+            type="submit"
             disabled={pending || props.disabled}
-            onClick={(e) => {
-                e.preventDefault();
-                const form = (e.currentTarget as HTMLButtonElement).form;
-                if (!form) return;
-
-                const fd = new FormData(form);
-
-                startTransition(async () => {
-                    try {
-                        await action(fd);
-                        toast.success(success);
-                    } catch (err: any) {
-                        toast.error(error);
-                    }
+            onClick={() => {
+                startTransition(() => {
+                    toast.loading("Processing...");
                 });
             }}
         >

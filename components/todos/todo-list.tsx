@@ -11,6 +11,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { SubmitButton } from "@/components/submit-button";
+import { Button } from "@/components/ui/button"; // 👈 use Button for edit trigger
 
 import { Todo } from "@/app/todos/fetch";
 import {
@@ -25,16 +26,20 @@ export function TodoList({ todo }: { todo: Todo }) {
     return (
         <Card className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 transition-colors">
             <div className="flex items-start sm:items-center gap-3 flex-1">
-                <form className="flex items-start">
+                {/* Toggle complete */}
+                <form action={toggleCompleteAction} className="flex items-start">
                     <Input type="hidden" name="id" value={todo._id} />
-                    <Input type="hidden" name="completed" value={(!todo.completed).toString()} />
+                    <Input
+                        type="hidden"
+                        name="completed"
+                        value={(!todo.completed).toString()}
+                    />
 
                     <SubmitButton
                         type="submit"
                         variant="ghost"
                         size="icon"
                         label="Toggle"
-                        action={toggleCompleteAction}
                         success={todo.completed ? "Marked incomplete" : "Marked complete"}
                         error="Failed to toggle todo"
                         aria-label={todo.completed ? "Mark as incomplete" : "Mark as complete"}
@@ -48,6 +53,7 @@ export function TodoList({ todo }: { todo: Todo }) {
                     </SubmitButton>
                 </form>
 
+                {/* Title + description */}
                 <div className="flex flex-col min-w-0">
                     <p
                         className={cn(
@@ -66,20 +72,17 @@ export function TodoList({ todo }: { todo: Todo }) {
             </div>
 
             <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+                {/* Edit */}
                 <Dialog>
                     <DialogTrigger asChild>
-                        <SubmitButton
+                        <Button
                             variant="outline"
                             size="icon"
-                            label="Edit"
-                            action={updateTodoAction}
-                            success="Todo updated"
-                            error="Update failed"
                             aria-label="Edit todo"
                             className="hover:bg-accent"
                         >
                             <Pencil className="h-4 w-4" />
-                        </SubmitButton>
+                        </Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
@@ -96,14 +99,14 @@ export function TodoList({ todo }: { todo: Todo }) {
                     </DialogContent>
                 </Dialog>
 
-                <form>
+                {/* Delete */}
+                <form action={deleteTodoAction}>
                     <Input type="hidden" name="id" value={todo._id} />
                     <SubmitButton
                         type="submit"
                         variant="destructive"
                         size="icon"
                         label="Delete"
-                        action={deleteTodoAction}
                         success="Todo deleted"
                         error="Delete failed"
                         aria-label="Delete todo"

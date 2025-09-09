@@ -1,9 +1,8 @@
-import {toast} from 'sonner';
-
-import { Button } from "@/components/ui/button";
+import {SubmitButton} from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {createTodoAction} from "@/app/todos/actions";
 
 export function TodoForm({
                              action,
@@ -13,30 +12,9 @@ export function TodoForm({
     defaults?: { title?: string; description?: string; id?: string };
 }) {
 
-    const handleSubmit = async (formData: FormData) => {
-        const title = formData.get("title")?.toString().trim();
-        const description = formData.get("description")?.toString().trim();
-
-        if (!title) {
-            toast.error("Title is required!");
-            return;
-        }
-        if (!description) {
-            toast.error("Description is required!");
-            return;
-        }
-
-        try {
-            await action?.(formData);
-            toast.success("Todo saved!");
-        } catch {
-            toast.error("Failed to save todo.");
-        }
-    };
-
     return (
         <form
-            action={handleSubmit}
+            action={createTodoAction}
             className="grid gap-4 sm:gap-5 p-1"
         >
             {defaults?.id && (
@@ -78,14 +56,14 @@ export function TodoForm({
 
             {/* Actions */}
             <div className="flex justify-end gap-2 pt-2">
-                <Button
-                    variant={'ghost'}
-                    size={'icon'}
-                    type="submit"
-                    className="px-4 w-full cursor-pointer"
-                >
-                    Save
-                </Button>
+                <SubmitButton
+                    variant="ghost"
+                    size="default"
+                    label="Save"
+                    success="Todo saved!"
+                    error="Failed to save todo."
+                    className="w-full cursor-pointer"
+                />
             </div>
         </form>
     );
