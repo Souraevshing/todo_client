@@ -5,17 +5,13 @@ import { TodoForm } from "@/components/todos/create-todo-form";
 import { TodoList } from "@/components/todos/todo-list";
 
 import { createTodoAction } from "@/app/todos/actions";
-import {BASE_URL} from "@/lib/config";
-import {Todo} from "@/app/todos/fetch";
+import {getTodos, Todo} from "@/app/todos/fetch";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
 
-    const res = await fetch(`${BASE_URL}/api/v1/todos`, {
-        next: {tags:["todos"]}
-    })
-    const todos:Todo[] = await res.json();
+    const todos:Todo[] = await getTodos();
 
     return (
         <div className="container mx-auto max-w-2xl space-y-8 px-4 py-6">

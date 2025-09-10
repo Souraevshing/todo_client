@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import {revalidatePath, revalidateTag} from "next/cache";
 
 import { BASE_URL } from "@/lib/config";
 import { fetchJSON } from "@/lib/http";
@@ -23,7 +23,7 @@ export async function createTodoAction(formData: FormData):Promise<void> {
 export async function deleteTodoAction(formData: FormData):Promise<void> {
     const id = String(formData.get("id"));
     await fetchJSON(`${BASE_URL}/api/v1/todos/${id}`, { method: "DELETE" });
-    revalidatePath(TODOS_PATH);
+    revalidateTag("todos");
 }
 
 export async function toggleCompleteAction(formData: FormData):Promise<void> {

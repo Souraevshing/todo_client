@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {usePathname} from "next/navigation";
 
 type ButtonProps = React.ComponentPropsWithoutRef<typeof Button>;
 
@@ -29,25 +30,40 @@ export function SubmitButton({
                                  ...props
                              }: SubmitButtonProps) {
     const { pending } = useFormStatus();
-
+    const pathname = usePathname();
     const [transitionPending, startTransition] = useTransition();
 
     const isLoading = pending || transitionPending;
-
     const loadingToastId = useRef<string | number | undefined>(undefined);
 
     useEffect(() => {
         if (onAction) return;
-        if (pending) {
+        if (pending && loadingToastId.current == null) {
             loadingToastId.current = toast.loading("Processing…");
-        } else {
-            if (loadingToastId.current !== undefined) {
-                toast.dismiss(loadingToastId.current);
-                loadingToastId.current = undefined;
-                if (autoSuccess) toast.success(success);
+        } else if(!pending && loadingToastId.current !=null) {
+            toast.dismiss(loadingToastId.current);
+            loadingToastId.current = undefined;
+            if(autoSuccess) {
+                toast.success(success)
             }
         }
     }, [pending, onAction, autoSuccess, success]);
+
+    useEffect(() => {
+        if (loadingToastId.current != null) {
+            toast.dismiss(loadingToastId.current);
+            loadingToastId.current = undefined;
+        }
+    }, [pathname]);
+
+    useEffect(() => {
+        return () => {
+            if (loadingToastId.current != null) {
+                toast.dismiss(loadingToastId.current);
+                loadingToastId.current = undefined;
+            }
+        };
+    }, []);
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (!onAction) return;

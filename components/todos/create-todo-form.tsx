@@ -7,9 +7,13 @@ import {createTodoAction} from "@/app/todos/actions";
 export function TodoForm({
                              action,
                              defaults,
+    submitLabel="Save",
+   className
                          }: {
     action?: (fd: FormData) => Promise<void>;
     defaults?: { title?: string; description?: string; id?: string };
+    submitLabel?: string;
+    className?: string;
 }) {
 
     const formAction = action ?? createTodoAction;
@@ -59,12 +63,12 @@ export function TodoForm({
             {/* Actions */}
             <div className="flex justify-end gap-2 pt-2">
                 <SubmitButton
-                    variant="ghost"
+                    variant="default"
                     size="default"
-                    label="Save"
+                    label={submitLabel}
                     success="Todo saved!"
                     error="Failed to save todo."
-                    className="w-full cursor-pointer"
+                    className="w-full sm:w-auto cursor-pointer"
                 />
             </div>
         </form>

@@ -11,7 +11,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { SubmitButton } from "@/components/submit-button";
-import { Button } from "@/components/ui/button"; // 👈 use Button for edit trigger
+import { Button } from "@/components/ui/button";
 
 import { Todo } from "@/app/todos/fetch";
 import {
@@ -78,24 +78,30 @@ export function TodoList({ todo }: { todo: Todo }) {
                         <Button
                             variant="secondary"
                             size="icon"
-                            aria-label="Edit todo"
+                            aria-label="Edit Todo"
                             className="hover:bg-accent cursor-pointer"
                         >
                             <Pencil className="h-4 w-4" />
                         </Button>
                     </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle className={`dark:text-white`}>Edit Todo</DialogTitle>
-                        </DialogHeader>
-                        <TodoForm
-                            action={updateTodoAction}
-                            defaults={{
-                                id: todo._id,
-                                title: todo.title,
-                                description: todo.description,
-                            }}
-                        />
+
+                    <DialogContent className="sm:max-w-lg p-0 overflow-hidden bg-background text-foreground">
+                        <div className="p-6">
+                            <DialogHeader className="p-0 mb-4">
+                                <DialogTitle>Edit Todo</DialogTitle>
+                            </DialogHeader>
+
+                            <TodoForm
+                                action={updateTodoAction}
+                                submitLabel={"Save Changes"}
+                                className="gap-4"
+                                defaults={{
+                                    id: todo._id,
+                                    title: todo.title,
+                                    description: todo.description,
+                                }}
+                            />
+                        </div>
                     </DialogContent>
                 </Dialog>
 
