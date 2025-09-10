@@ -5,20 +5,11 @@ import { useFormStatus } from "react-dom";
 import { useTransition, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import {usePathname} from "next/navigation";
 
-type ButtonProps = React.ComponentPropsWithoutRef<typeof Button>;
 
-type SubmitButtonProps = ButtonProps & {
-    label: string;
-    onAction?: (fd: FormData) => Promise<unknown>;
-    success?: string;
-    error?: string;
-    autoSuccess?: boolean;
-    children?: React.ReactNode;
-};
+import { Button } from "@/components/ui/button";
+import {SubmitButtonProps} from "@/types/button.types"
 
 export function SubmitButton({
                                  label,

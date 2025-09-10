@@ -21,12 +21,10 @@ export default function Error({
 
     return (
         <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center space-y-6 transition-colors">
-            {/* Icon */}
             <div className="flex items-center justify-center w-16 h-16 rounded-full bg-destructive/10 text-destructive">
                 <AlertTriangle className="h-8 w-8" />
             </div>
 
-            {/* Title & Message */}
             <div className="space-y-2">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground dark:text-black">
                     Oops, something went wrong
@@ -36,14 +34,13 @@ export default function Error({
                 </p>
             </div>
 
-            {/* Action */}
             <Button
                 variant={`outline`}
                 size="lg"
                 onClick={handleRetry}
                 className="px-6 cursor-pointer hover:text-black"
             >
-                Try again
+                Refresh
             </Button>
         </div>
     );

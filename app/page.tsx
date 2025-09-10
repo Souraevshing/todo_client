@@ -1,4 +1,5 @@
 import { ClipboardList } from "lucide-react";
+import Link from "next/link";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { TodoForm } from "@/components/todos/create-todo-form";
@@ -15,12 +16,13 @@ export default async function Page() {
 
     return (
         <div className="container mx-auto max-w-2xl space-y-8 px-4 py-6">
-            {/* Add Todo */}
             <Card className="shadow-sm transition-colors">
                 <CardHeader>
+                    <Link href="/" prefetch className={`inline-flex items-center`}>
                     <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">
-                        Todos
+                        Todos App
                     </h1>
+                    </Link>
                 </CardHeader>
                 <CardContent>
                     <TodoForm action={createTodoAction} />

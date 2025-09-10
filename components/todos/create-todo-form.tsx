@@ -2,6 +2,7 @@ import {SubmitButton} from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+
 import {createTodoAction} from "@/app/todos/actions";
 
 export function TodoForm({
@@ -27,7 +28,6 @@ export function TodoForm({
                 <Input type="hidden" name="id" defaultValue={defaults.id} />
             )}
 
-            {/* Title */}
             <div className="grid gap-2">
                 <Label htmlFor="title" className="text-sm font-medium">
                     Title<span className={`align-super text-red-500`}>*</span>
@@ -44,7 +44,6 @@ export function TodoForm({
                 />
             </div>
 
-            {/* Description */}
             <div className="grid gap-2">
                 <Label htmlFor="description" className="text-sm font-medium">
                     Description<span className={`align-super text-red-500`}>*</span>
@@ -59,8 +58,7 @@ export function TodoForm({
                     className="min-h-[100px] w-full resize-y"
                 />
             </div>
-
-            {/* Actions */}
+            
             <div className="flex justify-end gap-2 pt-2">
                 <SubmitButton
                     variant="default"

@@ -19,7 +19,6 @@ import {
     toggleCompleteAction,
     updateTodoAction,
 } from "@/app/todos/actions";
-
 import { cn } from "@/lib/utils";
 
 export function TodoList({ todo }: { todo: Todo }) {
@@ -27,7 +26,7 @@ export function TodoList({ todo }: { todo: Todo }) {
     return (
         <Card className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 transition-colors">
             <div className="flex items-start sm:items-center gap-3 flex-1">
-                {/* Toggle complete */}
+
                 <form action={toggleCompleteAction} className="flex items-start">
                     <Input type="hidden" name="id" value={todo._id} />
                     <Input
@@ -72,7 +71,7 @@ export function TodoList({ todo }: { todo: Todo }) {
             </div>
 
             <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
-                {/* Edit */}
+
                 <Dialog>
                     <DialogTrigger asChild>
                         <Button
@@ -86,6 +85,7 @@ export function TodoList({ todo }: { todo: Todo }) {
                     </DialogTrigger>
 
                     <DialogContent className="sm:max-w-lg p-0 overflow-hidden bg-background text-foreground">
+
                         <div className="p-6">
                             <DialogHeader className="p-0 mb-4">
                                 <DialogTitle>Edit Todo</DialogTitle>
@@ -105,7 +105,6 @@ export function TodoList({ todo }: { todo: Todo }) {
                     </DialogContent>
                 </Dialog>
 
-                {/* Delete */}
                 <form action={deleteTodoAction}>
                     <Input type="hidden" name="id" value={todo._id} />
                     <SubmitButton
