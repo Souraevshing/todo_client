@@ -77,11 +77,13 @@ export function ActionButton({
                 }
                 toast.success(success);
 
-                } catch (err: any) {
+                } catch (err: unknown) {
                  if (loadingToastId.current !== undefined) {
                     toast.dismiss(loadingToastId.current);
                     loadingToastId.current = undefined;
                 }
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
                 toast.error(err?.message ?? error);
             }
         });

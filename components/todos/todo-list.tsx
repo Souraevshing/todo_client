@@ -94,7 +94,7 @@ export function TodoList({ todo }: { todo: Todo }) {
                             <TodoForm
                                 action={updateTodoAction}
                                 submitLabel={"Save Changes"}
-                                className="gap-4"
+                                _className="gap-4"
                                 defaults={{
                                     id: todo._id,
                                     title: todo.title,

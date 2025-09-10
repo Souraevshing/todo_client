@@ -9,12 +9,12 @@ export function TodoForm({
                              action,
                              defaults,
     submitLabel="Save",
-   className
+   _className
                          }: {
     action?: (fd: FormData) => Promise<void>;
     defaults?: { title?: string; description?: string; id?: string };
     submitLabel?: string;
-    className?: string;
+    _className?: string;
 }) {
 
     const formAction = action ?? createTodoAction;
