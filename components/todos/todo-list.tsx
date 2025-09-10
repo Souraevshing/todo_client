@@ -23,6 +23,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export function TodoList({ todo }: { todo: Todo }) {
+
     return (
         <Card className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 transition-colors">
             <div className="flex items-start sm:items-center gap-3 flex-1">
@@ -53,7 +54,6 @@ export function TodoList({ todo }: { todo: Todo }) {
                     </SubmitButton>
                 </form>
 
-                {/* Title + description */}
                 <div className="flex flex-col min-w-0">
                     <p
                         className={cn(
@@ -76,17 +76,17 @@ export function TodoList({ todo }: { todo: Todo }) {
                 <Dialog>
                     <DialogTrigger asChild>
                         <Button
-                            variant="outline"
+                            variant="secondary"
                             size="icon"
                             aria-label="Edit todo"
-                            className="hover:bg-accent"
+                            className="hover:bg-accent cursor-pointer"
                         >
                             <Pencil className="h-4 w-4" />
                         </Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>Edit Todo</DialogTitle>
+                            <DialogTitle className={`dark:text-white`}>Edit Todo</DialogTitle>
                         </DialogHeader>
                         <TodoForm
                             action={updateTodoAction}
@@ -110,7 +110,7 @@ export function TodoList({ todo }: { todo: Todo }) {
                         success="Todo deleted"
                         error="Delete failed"
                         aria-label="Delete todo"
-                        className="hover:bg-destructive/90"
+                        className="hover:bg-destructive/90 cursor-pointer"
                     >
                         <Trash2 className="h-4 w-4" />
                     </SubmitButton>

@@ -11,9 +11,12 @@ export function TodoForm({
     action?: (fd: FormData) => Promise<void>;
     defaults?: { title?: string; description?: string; id?: string };
 }) {
+
+    const formAction = action ?? createTodoAction;
+
     return (
         <form
-            action={createTodoAction}
+            action={formAction}
             className="grid gap-4 sm:gap-5 p-1"
         >
             {defaults?.id && (
