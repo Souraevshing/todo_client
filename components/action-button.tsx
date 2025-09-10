@@ -11,7 +11,7 @@ import {usePathname} from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {SubmitButtonProps} from "@/types/button.types"
 
-export function SubmitButton({
+export function ActionButton({
                                  label,
                                  onAction,
                                  success = "Success!",

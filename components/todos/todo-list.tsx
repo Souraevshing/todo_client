@@ -10,7 +10,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { SubmitButton } from "@/components/submit-button";
+import { ActionButton } from "@/components/action-button";
 import { Button } from "@/components/ui/button";
 
 import { Todo } from "@/app/todos/fetch";
@@ -35,7 +35,7 @@ export function TodoList({ todo }: { todo: Todo }) {
                         value={(!todo.completed).toString()}
                     />
 
-                    <SubmitButton
+                    <ActionButton
                         type="submit"
                         variant="ghost"
                         size="icon"
@@ -50,7 +50,7 @@ export function TodoList({ todo }: { todo: Todo }) {
                         ) : (
                             <Circle className="h-5 w-5" />
                         )}
-                    </SubmitButton>
+                    </ActionButton>
                 </form>
 
                 <div className="flex flex-col min-w-0">
@@ -107,7 +107,7 @@ export function TodoList({ todo }: { todo: Todo }) {
 
                 <form action={deleteTodoAction}>
                     <Input type="hidden" name="id" value={todo._id} />
-                    <SubmitButton
+                    <ActionButton
                         type="submit"
                         variant="destructive"
                         size="icon"
@@ -118,7 +118,7 @@ export function TodoList({ todo }: { todo: Todo }) {
                         className="hover:bg-destructive/90 cursor-pointer"
                     >
                         <Trash2 className="h-4 w-4" />
-                    </SubmitButton>
+                    </ActionButton>
                 </form>
             </div>
         </Card>

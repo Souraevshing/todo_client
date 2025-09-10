@@ -1,4 +1,4 @@
-import {SubmitButton} from "@/components/submit-button";
+import {ActionButton} from "@/components/action-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -58,9 +58,9 @@ export function TodoForm({
                     className="min-h-[100px] w-full resize-y"
                 />
             </div>
-            
+
             <div className="flex justify-end gap-2 pt-2">
-                <SubmitButton
+                <ActionButton
                     variant="default"
                     size="default"
                     label={submitLabel}
